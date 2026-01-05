@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Expert System - Phase 1</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 30px;
+        background: #f4f4f4;
+      }
+      .container {
+        max-width: 500px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      select,
+      button {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      input {
+        width: 95%;
+        padding: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      button {
+        background: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      .result {
+        background: #e3f2fd;
+        padding: 15px;
+        margin-top: 20px;
+        border: 1px solid #2196f3;
+        border-radius: 5px;
+      }
+      label {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Step 1: System Usage Analysis</h2>
+
+      <form method="POST">
+        <label for="usage">Select Your Usage Type:</label>
+        <select name="usage" id="usage">
+          <option value="">-</option>
+          <option value="Gaming">Gaming</option>
+          <option value="Office">Office</option>
+          <option value="Economic">Economic</option>
+          <option value="Engineering">Engineering</option>
+          <option value="Rendering">Rendering</option>
+          <option value="Trading">Trading</option>
+        </select>
+        <label for="quantity"
+          >Budget in Million Toman (Min = 20 , Max = 200):</label
+        >
+        <input
+          type="number"
+          id="quantity"
+          name="budget"
+          min="20"
+          max="200"
+          required
+        />
+        <label for="cpu_pref">Preferred CPU Brand:</label>
+        <select name="cpu_pref" id="cpu_pref">
+          <option value="Auto">Any (Auto Recommendation)</option>
+          <option value="Intel">Intel</option>
+          <option value="AMD">AMD</option>
+        </select>
+        <label for="gpu_pref">Preferred GPU Brand:</label>
+        <select name="gpu_pref" id="gpu_pref">
+          <option value="Auto">Any (Auto Recommendation)</option>
+          <option value="Nvidia">Intel</option>
+          <option value="AMD">AMD</option>
+        </select>
+        <label for="case_size">Preferred Case Size:</label>
+        <select name="case_size" id="case_size">
+          <option value="Mid">Mid Tower (Standard - Recommended)</option>
+          <option value="Small">Small (Mini-ITX - Compact)</option>
+          <option value="Large">Large (Full Tower - Enthusiast)</option>
+        </select>
+        <button type="submit">Analyze System</button>
+      </form>
+
+      {% if result %}
+      <div class="result">
+        <h3>Analysis Result (Based on Table 1):</h3>
+        <p><strong>GPU Required:</strong> {{ result.gpu_required }}</p>
+        <p><strong>Min GPU Tier:</strong> {{ result.min_gpu_tier }}</p>
+        <p><strong>CPU Importance:</strong> {{ result.cpu_importance }}</p>
+        <p><strong>Base RAM:</strong> {{ result.ram_base_requirement }} GB</p>
+        <p><strong>Base Storage:</strong> {{ result.storage_base }}</p>
+      </div>
+      {% endif %}
+
+      <p></p>
+      {% if budget_result %}
+      <div class="result" style="background: #e8f5e9; border-color: #4caf50">
+        <h3>Budget Analysis (Table 2):</h3>
+        <p><strong>Tier:</strong> {{ budget_result.budget_tier }}</p>
+        <p><strong>Max CPU:</strong> {{ budget_result.max_cpu_tier }}</p>
+        <p><strong>Max GPU:</strong> {{ budget_result.max_gpu_tier }}</p>
+        <p><strong>RAM Limit:</strong> {{ budget_result.ram_limit }} GB</p>
+        <p><strong>Storage Limit:</strong> {{ budget_result.storage_limit }}</p>
+      </div>
+      {% endif %}
+      <p></p>
+      {% if cpu_result %}
+      <div
+        class="result"
+        style="background: #e3f2fd; border-color: #2196f3; margin-top: 10px"
+      >
+        <h3>Processor (CPU) Selection:</h3>
+        <p style="font-size: 1.2em; color: #d32f2f">
+          <strong>Model: {{ cpu_result.model }}</strong>
+        </p>
+        <p><strong>Brand:</strong> {{ cpu_result.brand }}</p>
+        <p><strong>Socket:</strong> {{ cpu_result.socket }}</p>
+        <p><strong>Performance Tier:</strong> {{ cpu_result.tier }}</p>
+      </div>
+      {% endif %}
+      <p></p>
+      {% if gpu_result %}
+      <div
+        class="result"
+        style="background: #f3e5f5; border-color: #9c27b0; margin-top: 10px"
+      >
+        <h3>Graphics Card (GPU):</h3>
+        <p style="font-size: 1.3em; color: #4a148c">
+          <strong>{{ gpu_result.model }}</strong>
+        </p>
+        <p><strong>Final Tier:</strong> {{ gpu_result.tier }}</p>
+        <p><strong>Brand:</strong> {{ gpu_result.brand }}</p>
+      </div>
+      {% endif %}
+      <p></p>
+      {% if case_result %}
+      <div
+        class="result"
+        style="background: #eceff1; border-color: #546e7a; margin-top: 10px"
+      >
+        <h3>Case (Chassis):</h3>
+        <p style="font-size: 1.2em; color: #37474f">
+          <strong>{{ case_result.model }}</strong>
+        </p>
+        <p><strong>Type:</strong> {{ case_result.form_factor }}</p>
+      </div>
+      {% endif %}
+      <p></p>
+      {% if mb_result %}
+      <div
+        class="result"
+        style="background: #e0f2f1; border-color: #009688; margin-top: 10px"
+      >
+        <h3>Motherboard:</h3>
+        <p style="font-size: 1.2em; color: #00695c">
+          <strong>{{ mb_result.model }}</strong>
+        </p>
+        <p><strong>Chipset:</strong> {{ mb_result.chipset }}</p>
+        <p><strong>Size:</strong> {{ mb_result.size }}</p>
+      </div>
+      {% endif %}
+    </div>
+  </body>
+</html>
