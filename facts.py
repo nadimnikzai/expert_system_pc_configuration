@@ -8,8 +8,8 @@ class UserInput(Fact):
     cpu_pref = Field(str)
     gpu_pref = Field(str)
     case_size = Field(str)
-    ram_pref = Field(str)
-    storage_pref = Field(str)
+    ram_pref = Field(int)  # مقدار دستی رم (مثلا 32) یا 0 برای اتوماتیک
+    storage_pref=Field(str)
 
 # --- خروجی جدول ۱: نیازهای سیستم (System Usage) ---
 class BaseRequirements(Fact):
@@ -65,13 +65,13 @@ class SelectedCase(Fact):
     form_factor = Field(str) # سایز کیس (Mid Tower, Full Tower...)
 
 
-# ... کدهای قبلی ...
-
-# --- خروجی مرحله ۶: رم و هارد (طبق تقاطع جداول) ---
 class SelectedRAM(Fact):
-    capacity = Field(int) # حجم نهایی (GB)
-    type = Field(str)     # DDR4 یا DDR5 (وابسته به پردازنده و بودجه)
+    capacity = Field(int)  # حجم (مثلا 16)
+    speed = Field(str)     # سرعت و نسل (مثلا DDR4 3200MHz)
+    model = Field(str)     # مدل و دلیل (مثلا Corsair ... (Reason))
+
 
 class SelectedStorage(Fact):
-    capacity = Field(str) # حجم نهایی (مثلا 1TB)
-    type = Field(str)     # NVMe Gen3 یا Gen4
+    capacity = Field(str) # مثلا 1 TB
+    model = Field(str)    # مثلا Samsung 980
+    type = Field(str)     # مثلا NVMe Gen4

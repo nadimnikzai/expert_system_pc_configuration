@@ -93,12 +93,53 @@
           <option value="Small">Small (Mini-ITX - Compact)</option>
           <option value="Large">Large (Full Tower - Enthusiast)</option>
         </select>
+        <div
+          class="full-width"
+          style="
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+            margin-top: 10px;
+          "
+        >
+          <label for="custom_ram" style="color: #e65100"
+            >🔧 Custom RAM Amount (Optional):</label
+          >
+          <select name="custom_ram" id="custom_ram">
+            <option value="0">Auto (Smart Select based on Table)</option>
+            <option value="8">8 GB</option>
+            <option value="16">16 GB</option>
+            <option value="32">32 GB</option>
+            <option value="64">64 GB</option>
+            <option value="128">128 GB</option>
+          </select>
+          <small style="color: #666"
+            >If you select a value, speed/type will still match your budget
+            tier.</small
+          >
+        </div>
+        <div class="full-width" style="margin-top: 15px">
+          <label for="custom_storage" style="color: #283593"
+            >💾 Custom SSD Storage (Optional):</label
+          >
+          <select name="custom_storage" id="custom_storage">
+            <option value="Auto">Auto (Smart Select based on Usage)</option>
+            <option value="256 GB">256 GB</option>
+            <option value="512 GB">512 GB</option>
+            <option value="1 TB">1 TB</option>
+            <option value="2 TB">2 TB</option>
+            <option value="4 TB">4 TB</option>
+          </select>
+          <small style="color: #666"
+            >If you select a size, the technology (Gen3/Gen4) will still match
+            your budget.</small
+          >
+        </div>
         <button type="submit">Analyze System</button>
       </form>
 
       {% if result %}
       <div class="result">
-        <h3>Analysis Result (Based on Table 1):</h3>
+        <h3>System Usage Analysis Result:</h3>
         <p><strong>GPU Required:</strong> {{ result.gpu_required }}</p>
         <p><strong>Min GPU Tier:</strong> {{ result.min_gpu_tier }}</p>
         <p><strong>CPU Importance:</strong> {{ result.cpu_importance }}</p>
@@ -110,7 +151,7 @@
       <p></p>
       {% if budget_result %}
       <div class="result" style="background: #e8f5e9; border-color: #4caf50">
-        <h3>Budget Analysis (Table 2):</h3>
+        <h3>Budget Analysis:</h3>
         <p><strong>Tier:</strong> {{ budget_result.budget_tier }}</p>
         <p><strong>Max CPU:</strong> {{ budget_result.max_cpu_tier }}</p>
         <p><strong>Max GPU:</strong> {{ budget_result.max_gpu_tier }}</p>
@@ -122,9 +163,9 @@
       {% if cpu_result %}
       <div
         class="result"
-        style="background: #e3f2fd; border-color: #2196f3; margin-top: 10px"
+        style="background: #c6681158; border-color: #2196f3; margin-top: 10px"
       >
-        <h3>Processor (CPU) Selection:</h3>
+        <h3>Processor (CPU):</h3>
         <p style="font-size: 1.2em; color: #d32f2f">
           <strong>Model: {{ cpu_result.model }}</strong>
         </p>
@@ -164,14 +205,43 @@
       {% if mb_result %}
       <div
         class="result"
-        style="background: #e0f2f1; border-color: #009688; margin-top: 10px"
+        style="background: #700f973a; border-color: #009688; margin-top: 10px"
       >
         <h3>Motherboard:</h3>
-        <p style="font-size: 1.2em; color: #00695c">
+        <p style="font-size: 1.2em; color: #150b0b">
           <strong>{{ mb_result.model }}</strong>
         </p>
         <p><strong>Chipset:</strong> {{ mb_result.chipset }}</p>
         <p><strong>Size:</strong> {{ mb_result.size }}</p>
+      </div>
+      {% endif %}
+      <p></p>
+      {% if ram_result %}
+      <div class="result">
+        <h3 style="color: #e65100">⚡ Memory (RAM)</h3>
+
+        <p class="highlight" style="font-size: 1.4em; font-weight: bold">
+          {{ ram_result.capacity }} GB
+        </p>
+
+        <p style="color: #333"><strong>Type:</strong> {{ ram_result.speed }}</p>
+
+        <p style="font-size: 0.9em; color: #666; font-style: italic">
+          Model: {{ ram_result.model }}
+        </p>
+      </div>
+      {% endif %}
+      <p></p>
+      {% if storage_result %}
+      <div class="result" style="background: #b4c70b4e">
+        <h3 style="color: #289348">💾 Storage (SSD)</h3>
+        <p class="highlight" style="font-size: 1.3em">
+          {{ storage_result.capacity }}
+        </p>
+        <p><strong>Tech:</strong> {{ storage_result.type }}</p>
+        <p style="font-size: 0.9em; color: #666">
+          Model: {{ storage_result.model }}
+        </p>
       </div>
       {% endif %}
     </div>
