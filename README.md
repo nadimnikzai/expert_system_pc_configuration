@@ -1,6 +1,5 @@
-# Expert-System-for-Consultation-and-Configuration-of-PC-Hardware-
+# Expert System for Consultation and Configuration of PC Hardware
 
-````markdown
 # 💻 PC Component Recommender Expert System
 
 A rule-based **Expert System** developed in Python that simulates a hardware consultant's logic to recommend optimal computer components based on specific user needs and constraints.
@@ -56,19 +55,17 @@ The system evaluates the following factors to generate a recommendation:
 ## 🚀 Installation & Usage
 
 1. **Clone the repository:**
+
    ```bash
    git clone https://github.com/nadimnikzai/Expert-System-for-Consultation-and-Configuration-of-PC-Hardware-.git
    ```
-````
-
-````
 
 2. **Navigate to the directory:**
 
 ```bash
 cd pc-expert-system
 
-````
+```
 
 3. **Run the system:**
 
@@ -84,7 +81,3 @@ python main.py
 - **Language:** Python 3.x
 - **Logic:** Rule-based Inference
 - **Documentation:** Mockler Diagrams & Decision Tables
-
-```
-
-```
