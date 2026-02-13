@@ -57,13 +57,13 @@ The system evaluates the following factors to generate a recommendation:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/nadimnikzai/Expert-System-for-Consultation-and-Configuration-of-PC-Hardware-.git
+   git clone https://github.com/nadimnikzai/expert_system_pc_configuration.git
    ```
 
 2. **Navigate to the directory:**
 
 ```bash
-cd pc-expert-system
+cd expert_system_pc_configuration
 
 ```
 
