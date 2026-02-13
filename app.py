@@ -84,4 +84,4 @@ def index():
     return render_template('index.html', result=result, budget_result=budget_result, cpu_result=cpu_result, gpu_result=gpu_result, mb_result=mb_result, case_result=case_result, ram_result=ram_result,storage_result=storage_result)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=8000)
